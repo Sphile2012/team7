@@ -7,6 +7,8 @@ const stats = [
   { icon: Award, label: "Certificate", value: "Software Development", sub: "Zaio Coding School · Alison", color: "from-cyan-500 to-blue-600" },
   { icon: Award, label: "Certificate", value: "Generative AI", sub: "WeThinkCode", color: "from-pink-500 to-rose-600" },
   { icon: Award, label: "Certificate", value: "Computer Hardware Basics", sub: "Cisco Networking Academy", color: "from-blue-500 to-indigo-600" },
+  { icon: Award, label: "Certificate", value: "IT Support", sub: "Alison", color: "from-orange-500 to-amber-600" },
+  { icon: Award, label: "Certificate", value: "IT Infrastructure", sub: "Alison", color: "from-yellow-500 to-orange-600" },
   { icon: MapPin, label: "Location", value: "South Africa", sub: "Open to remote work", color: "from-emerald-500 to-teal-600" },
 ];
 
