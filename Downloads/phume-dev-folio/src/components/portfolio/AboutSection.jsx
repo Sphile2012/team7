@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { GraduationCap, Award, Briefcase, MapPin } from "lucide-react";
 
 const stats = [
-  { icon: GraduationCap, label: "Degree", value: "BSc Mathematical Sciences", sub: "UNISA – Applied Math & CS", color: "from-violet-500 to-purple-600" },
+  { icon: GraduationCap, label: "Degree", value: "BSc Applied Mathematics & Computer Science", sub: "University of South Africa (UNISA)", color: "from-violet-500 to-purple-600" },
+  { icon: GraduationCap, label: "Certificate", value: "NQF Level 5 Mathematics & Statistics", sub: "University of South Africa (UNISA)", color: "from-violet-500 to-purple-600" },
   { icon: Award, label: "Certificate", value: "Software Development", sub: "Zaio Coding School · Alison", color: "from-cyan-500 to-blue-600" },
   { icon: Award, label: "Certificate", value: "Generative AI", sub: "WeThinkCode", color: "from-pink-500 to-rose-600" },
   { icon: Award, label: "Certificate", value: "Computer Hardware Basics", sub: "Cisco Networking Academy", color: "from-blue-500 to-indigo-600" },
   { icon: Award, label: "Certificate", value: "IT Support", sub: "Alison", color: "from-orange-500 to-amber-600" },
   { icon: Award, label: "Certificate", value: "IT Infrastructure", sub: "Alison", color: "from-yellow-500 to-orange-600" },
-  { icon: MapPin, label: "Location", value: "South Africa", sub: "Open to remote work", color: "from-emerald-500 to-teal-600" },
+  { icon: MapPin, label: "Location", value: "South Africa", sub: "Open to all work arrangements", color: "from-emerald-500 to-teal-600" },
 ];
 
 export default function AboutSection() {
@@ -22,8 +23,8 @@ export default function AboutSection() {
           transition={{ duration: 0.6 }} className="text-center mb-16">
           <p className="font-mono text-sm tracking-widest uppercase text-violet-400 mb-3">About Me</p>
           <h2 className="text-4xl sm:text-5xl font-bold">
-            <span className="text-gradient">Full-Stack Developer</span>
-            <span className="text-white"> & Problem Solver</span>
+            <span className="text-gradient">Software Developer</span>
+            <span className="text-white"> · Full-Stack · Mathematics & Computer Science</span>
           </h2>
         </motion.div>
 
@@ -31,10 +32,10 @@ export default function AboutSection() {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.6 }} className="space-y-5">
             {[
-              "Recent Applied Mathematics and Computer Science graduate with strong foundations in mathematics, statistics, and problem-solving.",
-              "Completed intensive Software Development bootcamp at Zaio Coding School (Alison-certified) and Generative AI course at WeThinkCode, mastering modern development workflows.",
-              "Built multiple full-stack applications using React, Firebase, and modern web technologies with focus on clean code, performance, and user experience.",
-              "Eager to apply my technical skills and analytical mindset in a professional environment, contributing to innovative projects and growing as a developer.",
+              "I am a Software Development graduate from Zaio Coding School and a final-semester Applied Mathematics & Computer Science student. My background pairs rigorous analytical thinking with hands-on engineering.",
+              "I build full-stack applications that are clean, performant, and built to last. I've shipped projects using React, Firebase, Node.js, JavaScript, HTML, and CSS, with a sharp focus on user experience and code quality.",
+              "A Cisco Computer Hardware certification deepens my understanding at the system level, giving me a fuller picture of how software and infrastructure interact.",
+              "I thrive in fast-moving teams, pick up new tools quickly, and care deeply about writing code that solves real problems. Open to junior & graduate software developer roles - ready to contribute from day one.",
             ].map((text, i) => (
               <p key={i} className="text-white/60 leading-relaxed text-base">{text}</p>
             ))}
