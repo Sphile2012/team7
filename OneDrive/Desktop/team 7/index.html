@@ -261,6 +261,15 @@
       background:#111;
     }
 
+    .vid-error {
+      color: #ff69b4;
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+      letter-spacing: 0.1em;
+      display: none;
+    }
+
     #dots {
       position:fixed; bottom:1.8rem; left:50%; transform:translateX(-50%);
       display:flex; gap:.8rem; z-index:200;
@@ -341,18 +350,22 @@
     <div class="slide" id="slide-0">
       <div class="slide-title">Team 7 Invincibles — Project Introduction</div>
       <video id="v0" controls></video>
+      <div class="vid-error" id="e0">⚠ Video failed to load</div>
     </div>
     <div class="slide" id="slide-1">
       <div class="slide-title">Preecey</div>
       <video id="v1" controls></video>
+      <div class="vid-error" id="e1">⚠ Video failed to load</div>
     </div>
     <div class="slide" id="slide-2">
       <div class="slide-title">SME FinTech — Unified Payments, Inventory &amp; Analytics</div>
       <video id="v2" controls></video>
+      <div class="vid-error" id="e2">⚠ Video failed to load</div>
     </div>
     <div class="slide" id="slide-3">
       <div class="slide-title">Precey 2</div>
       <video id="v3" controls></video>
+      <div class="vid-error" id="e3">⚠ Video failed to load</div>
     </div>
 
     <button class="arrow" id="prev" onclick="changeSlide(-1)">&#8592;</button>
@@ -361,141 +374,170 @@
   </div>
 
   <script>
-    // redirect file:// to server
+    // ── Step 1: if opened as file://, go to server ──
     if (window.location.protocol === 'file:') {
       window.location.replace('http://localhost:3000/index.html');
     }
 
-    // set video sources using the same origin that served this page
-    const ORIGIN = window.location.origin;
     const videoFiles = [
       'Team 7 Invincibles Project Introduction.mp4',
       'preecey.mp4',
       'SME FinTech_ Unified Payments, Inventory, Analytics.mp4',
       'Precey 2.mp4'
     ];
-    function setVideos() {
-      videoFiles.forEach((name, i) => {
-        const vid = document.getElementById('v' + i);
-        vid.src = ORIGIN + '/' + encodeURIComponent(name);
+
+    // ── Step 2: load videos ──
+    function loadVideos() {
+      // always use the origin that served the page
+      const base = window.location.origin + '/';
+
+      videoFiles.forEach(function(name, i) {
+        var vid  = document.getElementById('v' + i);
+        var errDiv = document.getElementById('e' + i);
+        var url  = base + encodeURIComponent(name);
+
+        console.log('Loading video ' + i + ' from: ' + url);
+
+        vid.src = url;
         vid.load();
+
+        vid.addEventListener('error', function() {
+          console.error('Video ' + i + ' failed. src=' + vid.src
+            + ' error=' + (vid.error ? vid.error.code : 'unknown'));
+          errDiv.textContent = '⚠ Cannot load: ' + name
+            + ' (error ' + (vid.error ? vid.error.code : '?') + ')  —  '
+            + 'Try: ' + url;
+          errDiv.style.display = 'block';
+        });
+
+        vid.addEventListener('loadedmetadata', function() {
+          console.log('Video ' + i + ' ready: ' + vid.duration + 's');
+        });
       });
     }
-    setVideos();
-    document.addEventListener('DOMContentLoaded', setVideos);
 
-    // particles
-    const pEl = document.getElementById('particles');
-    for (let i = 0; i < 30; i++) {
-      const p = document.createElement('div');
+    // Run now and again after DOM ready (belt and braces)
+    loadVideos();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadVideos);
+    }
+
+    // ── Particles ──
+    var pEl = document.getElementById('particles');
+    for (var i = 0; i < 30; i++) {
+      var p  = document.createElement('div');
       p.className = 'particle';
-      const sz = (2 + Math.random() * 4) + 'px';
-      p.style.cssText = `
-        left:${Math.random()*100}vw;
-        width:${sz};height:${sz};
-        animation-duration:${6+Math.random()*10}s;
-        animation-delay:${Math.random()*12}s;
-        background:${Math.random()>.5?'#ff69b4':'#ffffff'};
-      `;
+      var sz = (2 + Math.random() * 4) + 'px';
+      p.style.cssText = 'left:' + (Math.random()*100) + 'vw;'
+        + 'width:' + sz + ';height:' + sz + ';'
+        + 'animation-duration:' + (6+Math.random()*10) + 's;'
+        + 'animation-delay:' + (Math.random()*12) + 's;'
+        + 'background:' + (Math.random()>.5?'#ff69b4':'#ffffff') + ';';
       pEl.appendChild(p);
     }
 
-    // slideshow state
-    const slides   = document.querySelectorAll('.slide');
-    const dotsWrap = document.getElementById('dots');
-    const counter  = document.getElementById('counter');
-    let current = 0, animating = false;
+    // ── Slideshow ──
+    var slides   = document.querySelectorAll('.slide');
+    var dotsWrap = document.getElementById('dots');
+    var counter  = document.getElementById('counter');
+    var current  = 0, animating = false;
 
-    slides.forEach((_,i) => {
-      const d = document.createElement('div');
+    slides.forEach(function(_, i) {
+      var d = document.createElement('div');
       d.className = 'dot' + (i===0?' active':'');
-      d.onclick = () => goTo(i);
+      d.onclick = function(){ goTo(i); };
       dotsWrap.appendChild(d);
     });
 
     function updateDots() {
-      document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===current));
+      document.querySelectorAll('.dot').forEach(function(d,i){
+        d.classList.toggle('active', i===current);
+      });
       counter.textContent = (current+1) + ' / ' + slides.length;
     }
 
-    function goTo(index, instant=false) {
+    function goTo(index, instant) {
       if (animating && !instant) return;
       if (index===current && !instant) return;
       animating = true;
-      const oldSlide = slides[current];
-      const newSlide = slides[index];
+      var oldSlide = slides[current];
+      var newSlide = slides[index];
       if (!instant) {
         oldSlide.classList.add('exit-left');
         oldSlide.classList.remove('active');
         oldSlide.querySelector('video').pause();
       } else {
-        slides.forEach(s => s.classList.remove('active','exit-left'));
+        slides.forEach(function(s){ s.classList.remove('active','exit-left'); });
       }
       newSlide.style.transition = 'none';
       newSlide.style.opacity    = '0';
       newSlide.style.transform  = index > current ? 'translateX(80px)' : 'translateX(-80px)';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        newSlide.style.transition = '';
-        newSlide.classList.add('active');
-        current = index;
-        updateDots();
-        setTimeout(() => {
-          if (oldSlide !== newSlide) oldSlide.classList.remove('exit-left');
-          animating = false;
-        }, 900);
-      }));
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          newSlide.style.transition = '';
+          newSlide.classList.add('active');
+          current = index;
+          updateDots();
+          setTimeout(function(){
+            if (oldSlide !== newSlide) oldSlide.classList.remove('exit-left');
+            animating = false;
+          }, 900);
+        });
+      });
     }
 
     function changeSlide(dir) { goTo((current+dir+slides.length)%slides.length); }
 
-    let introTimer = null;
+    var introTimer = null;
 
     function startShow() {
-      const ws = document.getElementById('welcome-screen');
+      var ws = document.getElementById('welcome-screen');
       ws.style.opacity = '0';
-      setTimeout(() => { ws.style.display='none'; showIntro(); }, 1400);
+      setTimeout(function(){ ws.style.display='none'; showIntro(); }, 1400);
     }
 
     function showIntro() {
-      const intro = document.getElementById('intro-slide');
+      var intro = document.getElementById('intro-slide');
       intro.style.display = 'flex';
-      requestAnimationFrame(() => requestAnimationFrame(() => { intro.style.opacity='1'; }));
-
-      const iw=document.getElementById('iw'), ib=document.getElementById('ib');
-      const ir=document.getElementById('ir'), im=document.getElementById('im');
-      const it=document.getElementById('it'), skip=document.getElementById('skip-btn');
-
-      setTimeout(()=>{ iw.style.opacity='1'; iw.style.transform='translateY(0)'; },  400);
-      setTimeout(()=>{ ib.style.opacity='1'; ib.style.transform='scale(1)'; },        800);
-      setTimeout(()=>{ ir.style.width='min(360px,55vw)'; },                           1200);
-      setTimeout(()=>{ im.style.opacity='1'; im.style.transform='translateY(0)'; },   1400);
-      setTimeout(()=>{ it.style.opacity='1'; it.style.transform='translateY(0)'; },   1900);
-      setTimeout(()=>{ skip.classList.add('visible'); },                               2500);
-      introTimer = setTimeout(()=>launchShow(), 5500);
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ intro.style.opacity='1'; });
+      });
+      var iw=document.getElementById('iw'), ib=document.getElementById('ib');
+      var ir=document.getElementById('ir'), im=document.getElementById('im');
+      var it=document.getElementById('it'), skip=document.getElementById('skip-btn');
+      setTimeout(function(){ iw.style.opacity='1'; iw.style.transform='translateY(0)'; }, 400);
+      setTimeout(function(){ ib.style.opacity='1'; ib.style.transform='scale(1)'; },     800);
+      setTimeout(function(){ ir.style.width='min(360px,55vw)'; },                        1200);
+      setTimeout(function(){ im.style.opacity='1'; im.style.transform='translateY(0)'; },1400);
+      setTimeout(function(){ it.style.opacity='1'; it.style.transform='translateY(0)'; },1900);
+      setTimeout(function(){ skip.classList.add('visible'); },                            2500);
+      introTimer = setTimeout(function(){ launchShow(); }, 5500);
     }
 
     function launchShow() {
-      if (introTimer) { clearTimeout(introTimer); introTimer=null; }
-      const intro = document.getElementById('intro-slide');
+      if (introTimer){ clearTimeout(introTimer); introTimer=null; }
+      var intro = document.getElementById('intro-slide');
       intro.style.opacity = '0';
-      setTimeout(() => {
+      setTimeout(function(){
         intro.style.display = 'none';
-        const ss = document.getElementById('slideshow');
+        var ss = document.getElementById('slideshow');
         ss.style.display = 'flex';
         goTo(0, true);
       }, 1200);
     }
 
     function goHome() {
-      document.querySelectorAll('video').forEach(v=>v.pause());
+      document.querySelectorAll('video').forEach(function(v){ v.pause(); });
       document.getElementById('slideshow').style.display = 'none';
-      const ws = document.getElementById('welcome-screen');
+      var ws = document.getElementById('welcome-screen');
       ws.style.display = 'flex';
       ws.style.opacity = '0';
-      requestAnimationFrame(()=>requestAnimationFrame(()=>ws.style.opacity='1'));
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){ ws.style.opacity='1'; });
+      });
     }
 
-    document.addEventListener('keydown', e => {
+    document.addEventListener('keydown', function(e) {
       if (document.getElementById('slideshow').style.display==='none') return;
       if (e.key==='ArrowRight'||e.key==='ArrowDown') changeSlide(1);
       if (e.key==='ArrowLeft' ||e.key==='ArrowUp')   changeSlide(-1);
