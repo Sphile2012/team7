@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Team 7</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: #0d0009;
+      font-family: 'Cinzel', serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ═══════════════════════════════════════
+       WELCOME SCREEN
+    ═══════════════════════════════════════ */
+    #welcome-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, #2a0020 0%, #110008 55%, #0d0009 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      transition: opacity 1.4s ease;
+    }
+
+    /* animated grid */
+    #welcome-screen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,182,213,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,182,213,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 10s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0%   { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* pink glow orb */
+    .orb {
+      position: absolute;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,105,180,0.18) 0%, transparent 70%);
+      animation: orbPulse 3.5s ease-in-out infinite;
+    }
+
+    @keyframes orbPulse {
+      0%,100% { transform: scale(1);   opacity: 0.5; }
+      50%      { transform: scale(1.25); opacity: 1; }
+    }
+
+    .welcome-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* "WELCOME TO" */
+    .line-top {
+      font-family: 'Cinzel Decorative', serif;
+      font-weight: 400;
+      font-size: clamp(1rem, 3vw, 1.6rem);
+      letter-spacing: 0.45em;
+      color: #ffb6d9;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.3s forwards;
+      text-shadow: 0 0 20px rgba(255,105,180,0.6);
+    }
+
+    /* TEAM 7 — Old English blackletter */
+    .team7-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.02em;
+      opacity: 0;
+      animation: fadeDown 1s ease 0.7s forwards;
+    }
+
+    .team7-wrap span {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(4.5rem, 17vw, 13rem);
+      line-height: 1;
+      display: inline-block;
+      background: linear-gradient(160deg,
+        #ffffff 0%,
+        #ffe0f0 20%,
+        #ffb6d9 45%,
+        #ff69b4 70%,
+        #ff1493 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(255,105,180,0.9))
+              drop-shadow(2px 3px 8px rgba(0,0,0,0.9));
+      animation: letterGlow 3s ease-in-out infinite;
+    }
+
+    .team7-wrap span:nth-child(1) { animation-delay: 0.00s; }
+    .team7-wrap span:nth-child(2) { animation-delay: 0.15s; }
+    .team7-wrap span:nth-child(3) { animation-delay: 0.30s; }
+    .team7-wrap span:nth-child(4) { animation-delay: 0.45s; }
+    .team7-wrap span:nth-child(5) { animation-delay: 0.60s; }
+    .team7-wrap span:nth-child(6) { animation-delay: 0.75s; }
+
+    @keyframes letterGlow {
+      0%,100% { filter: drop-shadow(0 0 8px rgba(255,105,180,0.7))  drop-shadow(2px 3px 8px rgba(0,0,0,0.9)); }
+      50%      { filter: drop-shadow(0 0 30px rgba(255,105,180,1))   drop-shadow(0 0 60px rgba(255,20,147,0.7)) drop-shadow(2px 3px 8px rgba(0,0,0,0.9)); }
+    }
+
+    .team7-wrap:hover span {
+      animation: shimmer 0.55s ease forwards;
+    }
+
+    @keyframes shimmer {
+      0%   { filter: drop-shadow(0 0 8px rgba(255,105,180,0.7)); }
+      40%  { filter: drop-shadow(0 0 45px rgba(255,255,255,1)) drop-shadow(0 0 80px rgba(255,20,147,0.9)); }
+      100% { filter: drop-shadow(0 0 15px rgba(255,105,180,0.9)); }
+    }
+
+    /* "INVINCIBLES" */
+    .line-sub {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(1.2rem, 4.5vw, 2.5rem);
+      letter-spacing: 0.12em;
+      background: linear-gradient(90deg, #ffffff, #ffb6d9, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: fadeDown 1s ease 1.1s forwards;
+      text-shadow: none;
+      filter: drop-shadow(0 0 10px rgba(255,182,193,0.5));
+    }
+
+    /* divider */
+    .divider {
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff69b4, #ffffff, #ff69b4, transparent);
+      margin: 1rem 0;
+      animation: expandLine 1.2s ease 1.4s forwards;
+    }
+
+    @keyframes expandLine {
+      to { width: min(420px, 65vw); }
+    }
+
+    /* tagline */
+    .tagline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 2vw, 0.95rem);
+      color: #d88fa8;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeDown 1s ease 1.7s forwards;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CTA button */
+    #start-btn {
+      margin-top: 2.2rem;
+      padding: 0.9rem 3.2rem;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #fff;
+      background: transparent;
+      border: 1px solid #ff69b4;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeDown 1s ease 2.1s forwards;
+      transition: color 0.3s;
+    }
+
+    #start-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #ff1493, #ff69b4, #ffb6d9);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+
+    #start-btn:hover::before { transform: scaleX(1); }
+    #start-btn:hover { color: #fff; border-color: transparent; }
+
+    /* corner accents */
+    .corner {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      opacity: 0.55;
+    }
+
+    .corner.tl { top: 2rem; left: 2rem;   border-top: 2px solid #ff69b4; border-left: 2px solid #ff69b4; }
+    .corner.tr { top: 2rem; right: 2rem;  border-top: 2px solid #ff69b4; border-right: 2px solid #ff69b4; }
+    .corner.bl { bottom: 2rem; left: 2rem;  border-bottom: 2px solid #ff69b4; border-left: 2px solid #ff69b4; }
+    .corner.br { bottom: 2rem; right: 2rem; border-bottom: 2px solid #ff69b4; border-right: 2px solid #ff69b4; }
+
+    /* floating particles */
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: #ff69b4;
+      animation: float linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* ═══════════════════════════════════════
+       SLIDESHOW
+    ═══════════════════════════════════════ */
+    #slideshow {
+      position: fixed;
+      inset: 0;
+      background: #0d0009;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+      pointer-events: none;
+      padding: 1rem;
+    }
+
+    .slide.active      { opacity: 1; transform: translateX(0); pointer-events: auto; }
+    .slide.exit-left   { opacity: 0; transform: translateX(-80px); }
+
+    .slide-title {
+      font-family: 'UnifrakturMaguntia', cursive;
+      font-size: clamp(1.1rem, 3.5vw, 2rem);
+      background: linear-gradient(90deg, #ffffff, #ffb6d9, #ff69b4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+      filter: drop-shadow(0 0 10px rgba(255,105,180,0.5));
+    }
+
+    .slide video {
+      width: min(88vw, 900px);
+      max-height: 72vh;
+      border-radius: 10px;
+      box-shadow: 0 0 50px rgba(255,105,180,0.35), 0 10px 40px #000;
+      background: #111;
+    }
+
+    /* nav dots */
+    #dots {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.8rem;
+      z-index: 200;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #3a1525;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: 1px solid #ff69b455;
+    }
+
+    .dot.active { background: #ff69b4; transform: scale(1.4); border-color: #ff69b4; }
+
+    /* arrows */
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,105,180,0.1);
+      border: 1px solid rgba(255,105,180,0.35);
+      color: #ffb6d9;
+      font-size: 1.5rem;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .arrow:hover { background: rgba(255,105,180,0.4); border-color: #ff69b4; }
+    #prev { left: 1.2rem; }
+    #next { right: 1.2rem; }
+
+    #counter {
+      position: fixed;
+      top: 1rem;
+      right: 1.5rem;
+      color: #d88fa8;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      z-index: 200;
+    }
+
+    #home-btn {
+      position: fixed;
+      top: 1rem;
+      left: 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(255,105,180,0.35);
+      color: #d88fa8;
+      padding: 0.4rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      z-index: 200;
+      transition: all 0.2s;
+    }
+    #home-btn:hover { border-color: #ff69b4; color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ WELCOME SCREEN ══ -->
+  <div id="welcome-screen">
+    <div class="orb"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="welcome-content">
+      <div class="line-top">Welcome &nbsp; to</div>
+
+      <div class="team7-wrap">
+        <span>T</span><span>e</span><span>a</span><span>m</span><span>&thinsp;</span><span>7</span>
+      </div>
+
+      <div class="line-sub">Invincibles</div>
+      <div class="divider"></div>
+      <div class="tagline">Project &nbsp; Showcase</div>
+
+      <button id="start-btn" onclick="startShow()">&#9654;&nbsp;&nbsp;Enter</button>
+    </div>
+  </div>
+
+  <!-- ══ SLIDESHOW ══ -->
+  <div id="slideshow">
+
+    <button id="home-btn" onclick="goHome()">&#8962; Home</button>
+    <div id="counter"></div>
+
+    <div class="slide" id="slide-0">
+      <div class="slide-title">Team 7 Invincibles — Project Introduction</div>
+      <video id="v0" controls></video>
+    </div>
+
+    <div class="slide" id="slide-1">
+      <div class="slide-title">Preecey</div>
+      <video id="v1" controls></video>
+    </div>
+
+    <div class="slide" id="slide-2">
+      <div class="slide-title">SME FinTech — Unified Payments, Inventory &amp; Analytics</div>
+      <video id="v2" controls></video>
+    </div>
+
+    <div class="slide" id="slide-3">
+      <div class="slide-title">Precey 2</div>
+      <video id="v3" controls></video>
+    </div>
+
+    <button class="arrow" id="prev" onclick="changeSlide(-1)">&#8592;</button>
+    <button class="arrow" id="next" onclick="changeSlide(1)">&#8594;</button>
+    <div id="dots"></div>
+  </div>
+
+  <script>
+    // redirect if opened as file://
+    if (window.location.protocol === 'file:') {
+      window.location.href = 'http://localhost:3000';
+    }
+
+    // set video sources via server
+    const BASE = 'http://localhost:3000/';
+    const videoFiles = [
+      'Team 7 Invincibles Project Introduction.mp4',
+      'preecey.mp4',
+      'SME FinTech_ Unified Payments, Inventory, Analytics.mp4',
+      'Precey 2.mp4'
+    ];
+    videoFiles.forEach((name, i) => {
+      document.getElementById('v' + i).src = BASE + encodeURIComponent(name);
+    });
+
+    // particles
+    const pEl = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = (2 + Math.random() * 4) + 'px';
+      p.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        width: ${size}; height: ${size};
+        animation-duration: ${6 + Math.random() * 10}s;
+        animation-delay: ${Math.random() * 12}s;
+        background: ${Math.random() > 0.5 ? '#ff69b4' : '#ffffff'};
+        opacity: ${0.4 + Math.random() * 0.6};
+      `;
+      pEl.appendChild(p);
+    }
+
+    // slideshow
+    const slides   = document.querySelectorAll('.slide');
+    const dotsWrap = document.getElementById('dots');
+    const counter  = document.getElementById('counter');
+    let current = 0, animating = false;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsWrap.appendChild(d);
+    });
+
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current));
+      counter.textContent = (current + 1) + ' / ' + slides.length;
+    }
+
+    function goTo(index, instant = false) {
+      if (animating && !instant) return;
+      if (index === current && !instant) return;
+      animating = true;
+
+      const oldSlide = slides[current];
+      const newSlide = slides[index];
+
+      if (!instant) {
+        oldSlide.classList.add('exit-left');
+        oldSlide.classList.remove('active');
+        oldSlide.querySelector('video').pause();
+      } else {
+        slides.forEach(s => s.classList.remove('active', 'exit-left'));
+      }
+
+      newSlide.style.transition = 'none';
+      newSlide.style.opacity    = '0';
+      newSlide.style.transform  = index > current ? 'translateX(80px)' : 'translateX(-80px)';
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        newSlide.style.transition = '';
+        newSlide.classList.add('active');
+        current = index;
+        updateDots();
+        setTimeout(() => {
+          if (oldSlide !== newSlide) oldSlide.classList.remove('exit-left');
+          animating = false;
+        }, 900);
+      }));
+    }
+
+    function changeSlide(dir) {
+      goTo((current + dir + slides.length) % slides.length);
+    }
+
+    function startShow() {
+      const ws = document.getElementById('welcome-screen');
+      ws.style.opacity = '0';
+      setTimeout(() => {
+        ws.style.display = 'none';
+        const ss = document.getElementById('slideshow');
+        ss.style.display = 'flex';
+        goTo(0, true);
+      }, 1400);
+    }
+
+    function goHome() {
+      document.querySelectorAll('video').forEach(v => v.pause());
+      const ss = document.getElementById('slideshow');
+      const ws = document.getElementById('welcome-screen');
+      ss.style.display = 'none';
+      ws.style.display = 'flex';
+      ws.style.opacity = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => ws.style.opacity = '1'));
+    }
+
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('slideshow').style.display === 'none') return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    });
+
+    updateDots();
+  </script>
+</body>
+</html>
