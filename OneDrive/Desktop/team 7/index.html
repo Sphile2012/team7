@@ -3,313 +3,171 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to Team 7</title>
+  <title>Team 7 — The Invincibles</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      background: #0d0009;
-      font-family: 'Cinzel', serif;
-      height: 100vh;
-      overflow: hidden;
+      background:#0a0a0a;
+      font-family:'Rajdhani',sans-serif;
+      height:100vh; overflow:hidden;
     }
 
-    /* shared keyframes */
-    @keyframes gridMove  { 0%{background-position:0 0} 100%{background-position:60px 60px} }
-    @keyframes orbPulse  { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.25);opacity:1} }
-    @keyframes fadeDown  { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes gridMove  { 0%{background-position:0 0}100%{background-position:60px 60px} }
+    @keyframes orbPulse  { 0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.25);opacity:1} }
+    @keyframes fadeDown  { from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)} }
     @keyframes expandLine{ to{width:min(420px,65vw)} }
-    @keyframes floatUp   {
-      0%  {transform:translateY(100vh) scale(0);opacity:0}
-      10% {opacity:.7} 90%{opacity:.7}
-      100%{transform:translateY(-10vh) scale(1.5);opacity:0}
-    }
-
-    /* ══════════════════════════════════════
-       WELCOME SCREEN
-    ══════════════════════════════════════ */
-    #welcome-screen {
-      position:fixed; inset:0;
-      background:radial-gradient(ellipse at 50% 40%, #2a0020 0%, #110008 55%, #0d0009 100%);
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      z-index:100; transition:opacity 1.4s ease;
-    }
-    #welcome-screen::before {
-      content:''; position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(255,182,213,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,182,213,.06) 1px, transparent 1px);
-      background-size:60px 60px; animation:gridMove 10s linear infinite;
-    }
-
-    .orb {
-      position:absolute; width:560px; height:560px; border-radius:50%;
-      background:radial-gradient(circle,rgba(255,105,180,.18) 0%,transparent 70%);
-      animation:orbPulse 3.5s ease-in-out infinite;
-    }
-
-    .welcome-content {
-      position:relative; z-index:2;
-      display:flex; flex-direction:column; align-items:center; gap:.5rem;
-    }
-
-    .line-top {
-      font-family:'Cinzel Decorative',serif;
-      font-size:clamp(1rem,3vw,1.6rem); letter-spacing:.45em;
-      color:#ffb6d9; text-transform:uppercase;
-      opacity:0; animation:fadeDown 1s ease .3s forwards;
-      text-shadow:0 0 20px rgba(255,105,180,.6);
-    }
-
-    .team7-wrap {
-      display:flex; align-items:center; gap:.02em;
-      opacity:0; animation:fadeDown 1s ease .7s forwards;
-    }
-    .team7-wrap span {
-      font-family:'UnifrakturMaguntia',cursive;
-      font-size:clamp(4.5rem,17vw,13rem); line-height:1; display:inline-block;
-      background:linear-gradient(160deg,#ffffff 0%,#ffe0f0 20%,#ffb6d9 45%,#ff69b4 70%,#ff1493 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      filter:drop-shadow(0 0 12px rgba(255,105,180,.9)) drop-shadow(2px 3px 8px rgba(0,0,0,.9));
-      animation:letterGlow 3s ease-in-out infinite;
-    }
-    .team7-wrap span:nth-child(1){animation-delay:.00s}
-    .team7-wrap span:nth-child(2){animation-delay:.15s}
-    .team7-wrap span:nth-child(3){animation-delay:.30s}
-    .team7-wrap span:nth-child(4){animation-delay:.45s}
-    .team7-wrap span:nth-child(5){animation-delay:.60s}
-    .team7-wrap span:nth-child(6){animation-delay:.75s}
-
-    @keyframes letterGlow {
+    @keyframes floatUp   { 0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translateY(-10vh) scale(1.5);opacity:0} }
+    @keyframes letterGlow{
       0%,100%{filter:drop-shadow(0 0 8px rgba(255,105,180,.7)) drop-shadow(2px 3px 8px rgba(0,0,0,.9))}
-      50%    {filter:drop-shadow(0 0 30px rgba(255,105,180,1)) drop-shadow(0 0 60px rgba(255,20,147,.7)) drop-shadow(2px 3px 8px rgba(0,0,0,.9))}
+      50%{filter:drop-shadow(0 0 30px rgba(255,105,180,1)) drop-shadow(0 0 60px rgba(255,20,147,.7)) drop-shadow(2px 3px 8px rgba(0,0,0,.9))}
     }
-    .team7-wrap:hover span{animation:shimmer .55s ease forwards}
-    @keyframes shimmer {
-      0%  {filter:drop-shadow(0 0 8px rgba(255,105,180,.7))}
-      40% {filter:drop-shadow(0 0 45px rgba(255,255,255,1)) drop-shadow(0 0 80px rgba(255,20,147,.9))}
+    @keyframes shimmer{
+      0%{filter:drop-shadow(0 0 8px rgba(255,105,180,.7))}
+      40%{filter:drop-shadow(0 0 45px rgba(255,255,255,1)) drop-shadow(0 0 80px rgba(255,20,147,.9))}
       100%{filter:drop-shadow(0 0 15px rgba(255,105,180,.9))}
     }
+    @keyframes goldPulse{
+      0%,100%{text-shadow:0 0 10px rgba(212,175,55,.6),0 2px 4px rgba(0,0,0,.8)}
+      50%{text-shadow:0 0 30px rgba(212,175,55,1),0 0 60px rgba(255,215,0,.5),0 2px 4px rgba(0,0,0,.8)}
+    }
+    @keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes slideInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 
-    .line-sub {
-      font-family:'UnifrakturMaguntia',cursive;
-      font-size:clamp(1.2rem,4.5vw,2.5rem); letter-spacing:.12em;
-      background:linear-gradient(90deg,#ffffff,#ffb6d9,#ffffff);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      opacity:0; animation:fadeDown 1s ease 1.1s forwards;
-      filter:drop-shadow(0 0 10px rgba(255,182,193,.5));
+    /* ══ WELCOME SCREEN ══ */
+    #welcome-screen {
+      position:fixed;inset:0;
+      background:radial-gradient(ellipse at 50% 40%,#2a0020 0%,#110008 55%,#0d0009 100%);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      z-index:100;transition:opacity 1.4s ease;
     }
-
-    .divider {
-      width:0; height:2px;
-      background:linear-gradient(90deg,transparent,#ff69b4,#ffffff,#ff69b4,transparent);
-      margin:1rem 0; animation:expandLine 1.2s ease 1.4s forwards;
+    #welcome-screen::before{
+      content:'';position:absolute;inset:0;
+      background-image:linear-gradient(rgba(255,182,213,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,182,213,.06) 1px,transparent 1px);
+      background-size:60px 60px;animation:gridMove 10s linear infinite;
     }
-
-    .tagline {
-      font-family:'Cinzel',serif;
-      font-size:clamp(.7rem,2vw,.95rem); letter-spacing:.45em;
-      color:#d88fa8; text-transform:uppercase;
-      opacity:0; animation:fadeDown 1s ease 1.7s forwards;
-    }
-
-    #start-btn {
-      margin-top:2.2rem; padding:.9rem 3.2rem;
-      font-family:'Cinzel Decorative',serif; font-size:.8rem; letter-spacing:.25em;
-      text-transform:uppercase; color:#fff;
-      background:transparent; border:1px solid #ff69b4; border-radius:4px;
-      cursor:pointer; position:relative; overflow:hidden;
-      opacity:0; animation:fadeDown 1s ease 2.1s forwards; transition:color .3s;
-    }
-    #start-btn::before {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(90deg,#ff1493,#ff69b4,#ffb6d9);
-      transform:scaleX(0); transform-origin:left; transition:transform .4s ease; z-index:-1;
-    }
+    .orb{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,105,180,.18) 0%,transparent 70%);animation:orbPulse 3.5s ease-in-out infinite;}
+    .welcome-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;}
+    .line-top{font-family:'Cinzel Decorative',serif;font-size:clamp(1rem,3vw,1.6rem);letter-spacing:.45em;color:#ffb6d9;text-transform:uppercase;opacity:0;animation:fadeDown 1s ease .3s forwards;text-shadow:0 0 20px rgba(255,105,180,.6);}
+    .team7-wrap{display:flex;align-items:center;gap:.02em;opacity:0;animation:fadeDown 1s ease .7s forwards;}
+    .team7-wrap span{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(4.5rem,17vw,13rem);line-height:1;display:inline-block;background:linear-gradient(160deg,#ffffff 0%,#ffe0f0 20%,#ffb6d9 45%,#ff69b4 70%,#ff1493 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(255,105,180,.9)) drop-shadow(2px 3px 8px rgba(0,0,0,.9));animation:letterGlow 3s ease-in-out infinite;}
+    .team7-wrap span:nth-child(1){animation-delay:.00s}.team7-wrap span:nth-child(2){animation-delay:.15s}.team7-wrap span:nth-child(3){animation-delay:.30s}.team7-wrap span:nth-child(4){animation-delay:.45s}.team7-wrap span:nth-child(5){animation-delay:.60s}.team7-wrap span:nth-child(6){animation-delay:.75s}
+    .team7-wrap:hover span{animation:shimmer .55s ease forwards;}
+    .line-sub{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(1.2rem,4.5vw,2.5rem);letter-spacing:.12em;background:linear-gradient(90deg,#ffffff,#ffb6d9,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:fadeDown 1s ease 1.1s forwards;filter:drop-shadow(0 0 10px rgba(255,182,193,.5));}
+    .divider{width:0;height:2px;background:linear-gradient(90deg,transparent,#ff69b4,#ffffff,#ff69b4,transparent);margin:1rem 0;animation:expandLine 1.2s ease 1.4s forwards;}
+    .tagline{font-family:'Cinzel',serif;font-size:clamp(.7rem,2vw,.95rem);letter-spacing:.45em;color:#d88fa8;text-transform:uppercase;opacity:0;animation:fadeDown 1s ease 1.7s forwards;}
+    #start-btn{margin-top:2.2rem;padding:.9rem 3.2rem;font-family:'Cinzel Decorative',serif;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:#fff;background:transparent;border:1px solid #ff69b4;border-radius:4px;cursor:pointer;position:relative;overflow:hidden;opacity:0;animation:fadeDown 1s ease 2.1s forwards;transition:color .3s;}
+    #start-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#ff1493,#ff69b4,#ffb6d9);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;z-index:-1;}
     #start-btn:hover::before{transform:scaleX(1)}
     #start-btn:hover{color:#0d0009;border-color:transparent}
-
     .corner{position:absolute;width:38px;height:38px;opacity:.5}
-    .corner.tl{top:2rem;left:2rem;    border-top:2px solid #ff69b4;border-left:2px solid #ff69b4}
-    .corner.tr{top:2rem;right:2rem;   border-top:2px solid #ff69b4;border-right:2px solid #ff69b4}
-    .corner.bl{bottom:2rem;left:2rem; border-bottom:2px solid #ff69b4;border-left:2px solid #ff69b4}
+    .corner.tl{top:2rem;left:2rem;border-top:2px solid #ff69b4;border-left:2px solid #ff69b4}
+    .corner.tr{top:2rem;right:2rem;border-top:2px solid #ff69b4;border-right:2px solid #ff69b4}
+    .corner.bl{bottom:2rem;left:2rem;border-bottom:2px solid #ff69b4;border-left:2px solid #ff69b4}
     .corner.br{bottom:2rem;right:2rem;border-bottom:2px solid #ff69b4;border-right:2px solid #ff69b4}
-
     .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
     .particle{position:absolute;border-radius:50%;animation:floatUp linear infinite;opacity:0}
 
-    /* ══════════════════════════════════════
-       INTRO SLIDE
-    ══════════════════════════════════════ */
-    #intro-slide {
-      position:fixed; inset:0;
-      background:radial-gradient(ellipse at 50% 45%, #2a0020 0%, #110008 55%, #0d0009 100%);
-      display:none; flex-direction:column; align-items:center; justify-content:center;
-      z-index:90; opacity:0; transition:opacity 1.2s ease; overflow:hidden;
-    }
-    #intro-slide::before {
-      content:''; position:absolute; inset:0;
-      background-image:
-        linear-gradient(rgba(255,182,213,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,182,213,.05) 1px, transparent 1px);
-      background-size:60px 60px; animation:gridMove 10s linear infinite;
-    }
-
-    .intro-orb {
-      position:absolute; width:600px; height:600px; border-radius:50%;
-      background:radial-gradient(circle,rgba(255,105,180,.13) 0%,transparent 70%);
-      animation:orbPulse 4s ease-in-out infinite;
-    }
-
-    .intro-content{
-      position:relative; z-index:2;
-      display:flex; flex-direction:column; align-items:center; gap:0;
-      text-align:center; padding:2rem;
-    }
-
-    .intro-when {
-      font-family:'Cinzel',serif; font-size:clamp(1rem,3vw,1.5rem);
-      letter-spacing:.5em; color:#d88fa8; text-transform:uppercase;
-      opacity:0; transform:translateY(30px);
-      transition:opacity 1s ease, transform 1s ease;
-    }
-    .intro-best {
-      font-family:'UnifrakturMaguntia',cursive;
-      font-size:clamp(3.5rem,13vw,9.5rem); line-height:1;
-      background:linear-gradient(160deg,#ffffff 0%,#ffe0f0 25%,#ffb6d9 50%,#ff69b4 80%,#ff1493 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      filter:drop-shadow(0 0 18px rgba(255,105,180,.8)) drop-shadow(2px 4px 10px rgba(0,0,0,.9));
-      opacity:0; transform:scale(.85);
-      transition:opacity 1.1s ease .35s, transform 1.1s ease .35s;
-    }
-    .intro-rule {
-      width:0; height:2px;
-      background:linear-gradient(90deg,transparent,#ff69b4,#ffffff,#ff69b4,transparent);
-      margin:.6rem auto; transition:width 1s ease 1.2s;
-    }
-    .intro-meet {
-      font-family:'Cinzel Decorative',serif; font-weight:700;
-      font-size:clamp(1.4rem,5vw,3.5rem); letter-spacing:.35em;
-      color:#ffffff; text-shadow:0 0 25px rgba(255,105,180,.7), 0 0 60px rgba(255,20,147,.4);
-      text-transform:uppercase;
-      opacity:0; transform:translateY(-20px);
-      transition:opacity 1s ease 1s, transform 1s ease 1s;
-    }
-    .intro-tech {
-      font-family:'UnifrakturMaguntia',cursive;
-      font-size:clamp(3rem,11vw,8rem); line-height:1;
-      background:linear-gradient(135deg,#ffffff 0%,#ffb6d9 40%,#ff1493 100%);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      filter:drop-shadow(0 0 20px rgba(255,20,147,.9)) drop-shadow(2px 4px 10px rgba(0,0,0,.9));
-      opacity:0; transform:translateY(30px);
-      transition:opacity 1.1s ease 1.5s, transform 1.1s ease 1.5s;
-      animation:techPulse 3s ease-in-out 2.8s infinite;
-    }
-    @keyframes techPulse {
-      0%,100%{filter:drop-shadow(0 0 15px rgba(255,20,147,.7)) drop-shadow(2px 4px 10px rgba(0,0,0,.9))}
-      50%    {filter:drop-shadow(0 0 40px rgba(255,105,180,1)) drop-shadow(0 0 80px rgba(255,20,147,.6)) drop-shadow(2px 4px 10px rgba(0,0,0,.9))}
-    }
-
+    /* ══ INTRO SLIDE ══ */
+    #intro-slide{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 45%,#2a0020 0%,#110008 55%,#0d0009 100%);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:90;opacity:0;transition:opacity 1.2s ease;overflow:hidden;}
+    #intro-slide::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,182,213,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,182,213,.05) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 10s linear infinite;}
+    .intro-orb{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,105,180,.13) 0%,transparent 70%);animation:orbPulse 4s ease-in-out infinite;}
+    .intro-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;text-align:center;padding:2rem;}
+    .intro-when{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:.5em;color:#d88fa8;text-transform:uppercase;opacity:0;transform:translateY(30px);transition:opacity 1s ease,transform 1s ease;}
+    .intro-best{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(3.5rem,13vw,9.5rem);line-height:1;background:linear-gradient(160deg,#ffffff 0%,#ffe0f0 25%,#ffb6d9 50%,#ff69b4 80%,#ff1493 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(255,105,180,.8)) drop-shadow(2px 4px 10px rgba(0,0,0,.9));opacity:0;transform:scale(.85);transition:opacity 1.1s ease .35s,transform 1.1s ease .35s;}
+    .intro-rule{width:0;height:2px;background:linear-gradient(90deg,transparent,#ff69b4,#ffffff,#ff69b4,transparent);margin:.6rem auto;transition:width 1s ease 1.2s;}
+    .intro-meet{font-family:'Cinzel Decorative',serif;font-weight:700;font-size:clamp(1.4rem,5vw,3.5rem);letter-spacing:.35em;color:#ffffff;text-shadow:0 0 25px rgba(255,105,180,.7),0 0 60px rgba(255,20,147,.4);text-transform:uppercase;opacity:0;transform:translateY(-20px);transition:opacity 1s ease 1s,transform 1s ease 1s;}
+    .intro-tech{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(3rem,11vw,8rem);line-height:1;background:linear-gradient(135deg,#ffffff 0%,#ffb6d9 40%,#ff1493 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(255,20,147,.9)) drop-shadow(2px 4px 10px rgba(0,0,0,.9));opacity:0;transform:translateY(30px);transition:opacity 1.1s ease 1.5s,transform 1.1s ease 1.5s;}
     .intro-corner{position:absolute;width:38px;height:38px;opacity:.4}
-    .intro-corner.tl{top:2rem;left:2rem;    border-top:2px solid #ff69b4;border-left:2px solid #ff69b4}
-    .intro-corner.tr{top:2rem;right:2rem;   border-top:2px solid #ff69b4;border-right:2px solid #ff69b4}
-    .intro-corner.bl{bottom:2rem;left:2rem; border-bottom:2px solid #ff69b4;border-left:2px solid #ff69b4}
+    .intro-corner.tl{top:2rem;left:2rem;border-top:2px solid #ff69b4;border-left:2px solid #ff69b4}
+    .intro-corner.tr{top:2rem;right:2rem;border-top:2px solid #ff69b4;border-right:2px solid #ff69b4}
+    .intro-corner.bl{bottom:2rem;left:2rem;border-bottom:2px solid #ff69b4;border-left:2px solid #ff69b4}
     .intro-corner.br{bottom:2rem;right:2rem;border-bottom:2px solid #ff69b4;border-right:2px solid #ff69b4}
-
-    #skip-btn {
-      position:absolute; bottom:2.5rem; right:2rem;
-      background:transparent; border:1px solid rgba(255,105,180,.35); color:#d88fa8;
-      padding:.4rem 1.2rem; border-radius:4px; cursor:pointer;
-      font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.15em; z-index:3;
-      opacity:0; transition:opacity .5s ease 2.5s, border-color .2s, color .2s;
-    }
+    #skip-btn{position:absolute;bottom:2.5rem;right:2rem;background:transparent;border:1px solid rgba(255,105,180,.35);color:#d88fa8;padding:.4rem 1.2rem;border-radius:4px;cursor:pointer;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;z-index:3;opacity:0;transition:opacity .5s ease 2.5s,border-color .2s,color .2s;}
     #skip-btn.visible{opacity:1}
     #skip-btn:hover{border-color:#ff69b4;color:#fff}
 
-    /* ══════════════════════════════════════
-       SLIDESHOW
-    ══════════════════════════════════════ */
-    #slideshow {
-      position:fixed; inset:0; background:#0d0009;
-      display:none; align-items:center; justify-content:center;
-    }
+    /* ══ SLIDESHOW SHELL ══ */
+    #slideshow{position:fixed;inset:0;background:#0a0a0a;display:none;align-items:center;justify-content:center;}
+    .slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateX(80px);transition:opacity .85s ease,transform .85s ease;pointer-events:none;overflow:hidden;}
+    .slide.active{opacity:1;transform:translateX(0);pointer-events:auto}
+    .slide.exit-left{opacity:0;transform:translateX(-80px)}
+    #dots{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:200;flex-wrap:wrap;justify-content:center;max-width:90vw;}
+    .dot{width:8px;height:8px;border-radius:50%;background:#2a1a00;cursor:pointer;transition:background .3s,transform .3s;border:1px solid #d4af3755;}
+    .dot.active{background:#d4af37;transform:scale(1.4);border-color:#d4af37}
+    .arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.35);color:#d4af37;font-size:1.5rem;width:48px;height:48px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:200;transition:background .2s,border-color .2s;}
+    .arrow:hover{background:rgba(212,175,55,.4);border-color:#d4af37}
+    #prev{left:1rem}#next{right:1rem}
+    #counter{position:fixed;top:.8rem;right:1.5rem;color:#d4af37;font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.1em;z-index:200;}
+    #home-btn{position:fixed;top:.8rem;left:1.5rem;background:transparent;border:1px solid rgba(212,175,55,.35);color:#d4af37;padding:.35rem 1rem;border-radius:4px;cursor:pointer;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;z-index:200;transition:all .2s;}
+    #home-btn:hover{border-color:#d4af37;color:#fff}
 
-    .slide {
-      position:absolute; inset:0;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      opacity:0; transform:translateX(80px);
-      transition:opacity .85s ease, transform .85s ease;
-      pointer-events:none; padding:1rem;
-    }
-    .slide.active    {opacity:1;transform:translateX(0);pointer-events:auto}
-    .slide.exit-left {opacity:0;transform:translateX(-80px)}
+    /* ══ SLIDE SHARED STYLES ══ */
+    .slide-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a1200 50%,#0a0a0a 100%);}
+    .slide-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);background-size:40px 40px;}
+    .slide-inner{position:relative;z-index:2;width:min(95vw,1100px);height:90vh;display:flex;flex-direction:column;justify-content:center;padding:2rem;}
+    .gold{color:#d4af37}.gold2{color:#f0c040}.white{color:#ffffff}.dim{color:#aaa}
 
-    .slide-title {
-      font-family:'UnifrakturMaguntia',cursive;
-      font-size:clamp(1.1rem,3.5vw,2rem);
-      background:linear-gradient(90deg,#ffffff,#ffb6d9,#ff69b4);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-      margin-bottom:1.2rem;
-      filter:drop-shadow(0 0 10px rgba(255,105,180,.5));
-    }
+    /* slide number badge */
+    .badge{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border:2px solid #d4af37;font-family:'Cinzel',serif;font-weight:700;font-size:1.1rem;color:#d4af37;margin-bottom:1.2rem;}
 
-    .slide video {
-      width:min(88vw,900px); max-height:72vh; border-radius:10px;
-      box-shadow:0 0 50px rgba(255,105,180,.35), 0 10px 40px rgba(0,0,0,.8);
-      background:#111;
-    }
+    /* gold top bar */
+    .top-bar{width:100%;height:4px;background:linear-gradient(90deg,transparent,#d4af37,#f0c040,#d4af37,transparent);margin-bottom:2rem;}
+    .bottom-bar{width:100%;height:4px;background:linear-gradient(90deg,transparent,#d4af37,#f0c040,#d4af37,transparent);margin-top:2rem;}
 
-    .vid-error {
-      color: #ff69b4;
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      margin-top: 0.8rem;
-      letter-spacing: 0.1em;
-      display: none;
-    }
+    /* main title styles */
+    .slide-h1{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(2.5rem,8vw,6rem);line-height:1;color:#d4af37;animation:goldPulse 3s ease-in-out infinite;text-transform:uppercase;text-align:center;}
+    .slide-h1-italic{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(3rem,10vw,7rem);color:#d4af37;font-style:italic;text-transform:uppercase;text-align:center;animation:goldPulse 3s ease-in-out infinite;}
+    .slide-sub{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(1rem,3vw,1.8rem);letter-spacing:.25em;color:#fff;text-transform:uppercase;text-align:center;margin-top:.5rem;}
+    .slide-tagline{font-family:'Rajdhani',sans-serif;font-size:clamp(.9rem,2.5vw,1.3rem);color:#aaa;letter-spacing:.2em;text-transform:uppercase;text-align:center;margin-top:1rem;}
 
-    #dots {
-      position:fixed; bottom:1.8rem; left:50%; transform:translateX(-50%);
-      display:flex; gap:.8rem; z-index:200;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:#3a1525; cursor:pointer;
-      transition:background .3s, transform .3s; border:1px solid #ff69b455;
-    }
-    .dot.active{background:#ff69b4;transform:scale(1.4);border-color:#ff69b4}
+    /* member card */
+    .member-card{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;padding:2rem;border:1px solid #d4af3744;border-left:3px solid #d4af37;background:rgba(212,175,55,.04);border-radius:4px;max-width:500px;}
+    .member-name{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(2rem,6vw,4rem);color:#d4af37;text-transform:uppercase;animation:goldPulse 3s ease-in-out infinite;}
+    .member-role{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1rem,3vw,1.6rem);color:#fff;letter-spacing:.2em;text-transform:uppercase;}
+    .member-power-label{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:#d4af37;letter-spacing:.15em;margin-top:.8rem;}
+    .member-power{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(1rem,2.5vw,1.4rem);color:#fff;letter-spacing:.1em;text-transform:uppercase;}
+    .member-desc{font-family:'Rajdhani',sans-serif;font-size:clamp(.85rem,2vw,1.1rem);color:#bbb;line-height:1.6;max-width:420px;}
+    .member-icon{font-size:2.5rem;margin-top:.5rem;}
 
-    .arrow {
-      position:fixed; top:50%; transform:translateY(-50%);
-      background:rgba(255,105,180,.1); border:1px solid rgba(255,105,180,.35);
-      color:#ffb6d9; font-size:1.5rem; width:50px; height:50px;
-      border-radius:50%; cursor:pointer; display:flex;
-      align-items:center; justify-content:center; z-index:200;
-      transition:background .2s, border-color .2s;
-    }
-    .arrow:hover{background:rgba(255,105,180,.4);border-color:#ff69b4}
-    #prev{left:1.2rem} #next{right:1.2rem}
+    /* grid layouts */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;width:100%;}
+    .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;width:100%;}
+    .info-card{background:rgba(212,175,55,.06);border:1px solid #d4af3733;border-radius:4px;padding:1.2rem;display:flex;flex-direction:column;gap:.5rem;}
+    .info-card h3{font-family:'Cinzel',serif;font-size:clamp(.85rem,2vw,1.1rem);color:#d4af37;text-transform:uppercase;letter-spacing:.1em;}
+    .info-card p{font-family:'Rajdhani',sans-serif;font-size:clamp(.8rem,1.8vw,1rem);color:#ccc;line-height:1.5;}
+    .info-card .num{font-family:'Cinzel',serif;font-size:1.8rem;color:#f0c040;font-weight:700;}
 
-    #counter{
-      position:fixed; top:1rem; right:1.5rem;
-      color:#d88fa8; font-family:'Cinzel',serif;
-      font-size:.75rem; letter-spacing:.1em; z-index:200;
-    }
-    #home-btn {
-      position:fixed; top:1rem; left:1.5rem;
-      background:transparent; border:1px solid rgba(255,105,180,.35); color:#d88fa8;
-      padding:.4rem 1.2rem; border-radius:4px; cursor:pointer;
-      font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.15em; z-index:200;
-      transition:all .2s;
-    }
-    #home-btn:hover{border-color:#ff69b4;color:#fff}
+    /* section heading slide */
+    .upnext-label{font-family:'Rajdhani',sans-serif;font-weight:400;font-size:clamp(1rem,3vw,1.8rem);color:#aaa;letter-spacing:.3em;text-transform:uppercase;text-align:center;}
+    .upnext-title{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(2.5rem,8vw,5.5rem);color:#d4af37;text-transform:uppercase;text-align:center;animation:goldPulse 3s ease-in-out infinite;margin-top:.5rem;}
+    .upnext-icon{font-size:5rem;text-align:center;margin-top:1.5rem;}
+
+    /* storyboard grid */
+    .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;width:100%;}
+    .story-card{background:rgba(212,175,55,.05);border:1px solid #d4af3733;border-radius:4px;padding:1rem;}
+    .story-card h4{font-family:'Cinzel',serif;font-size:.8rem;color:#d4af37;text-transform:uppercase;margin-bottom:.4rem;letter-spacing:.1em;}
+    .story-card p{font-family:'Rajdhani',sans-serif;font-size:.85rem;color:#bbb;line-height:1.4;}
+    .story-card .emoji{font-size:1.8rem;margin-bottom:.4rem;}
+
+    /* conclusion */
+    .highs-lows{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;width:100%;margin-bottom:1.5rem;}
+    .box-highs{background:rgba(0,180,80,.08);border:1px solid rgba(0,180,80,.3);border-radius:4px;padding:1.2rem;}
+    .box-lows{background:rgba(220,50,50,.08);border:1px solid rgba(220,50,50,.3);border-radius:4px;padding:1.2rem;}
+    .box-highs h3{color:#00c853;font-family:'Cinzel',serif;font-size:1rem;text-transform:uppercase;margin-bottom:.8rem;}
+    .box-lows h3{color:#ff5252;font-family:'Cinzel',serif;font-size:1rem;text-transform:uppercase;margin-bottom:.8rem;}
+    .box-highs li,.box-lows li{font-family:'Rajdhani',sans-serif;font-size:.95rem;color:#ddd;margin-left:1rem;margin-bottom:.4rem;}
+    .learnings{background:rgba(212,175,55,.07);border:1px solid #d4af3744;border-radius:4px;padding:1.2rem;width:100%;}
+    .learnings h3{font-family:'Cinzel',serif;color:#d4af37;font-size:1rem;text-transform:uppercase;margin-bottom:.8rem;letter-spacing:.1em;}
+    .learnings li{font-family:'Rajdhani',sans-serif;font-size:.95rem;color:#ddd;margin-left:1rem;margin-bottom:.4rem;}
   </style>
 </head>
 <body>
 
-  <!-- ══ WELCOME SCREEN ══ -->
+  <!-- WELCOME SCREEN -->
   <div id="welcome-screen">
     <div class="orb"></div>
     <div class="particles" id="particles"></div>
@@ -317,9 +175,7 @@
     <div class="corner bl"></div><div class="corner br"></div>
     <div class="welcome-content">
       <div class="line-top">Welcome &nbsp; to</div>
-      <div class="team7-wrap">
-        <span>T</span><span>e</span><span>a</span><span>m</span><span>&thinsp;</span><span>7</span>
-      </div>
+      <div class="team7-wrap"><span>T</span><span>e</span><span>a</span><span>m</span><span>&thinsp;</span><span>7</span></div>
       <div class="line-sub">Invincibles</div>
       <div class="divider"></div>
       <div class="tagline">Project &nbsp; Showcase</div>
@@ -327,7 +183,7 @@
     </div>
   </div>
 
-  <!-- ══ INTRO SLIDE ══ -->
+  <!-- INTRO SLIDE -->
   <div id="intro-slide">
     <div class="intro-orb"></div>
     <div class="intro-corner tl"></div><div class="intro-corner tr"></div>
@@ -342,205 +198,407 @@
     <button id="skip-btn" onclick="launchShow()">Skip &#8594;</button>
   </div>
 
-  <!-- ══ SLIDESHOW ══ -->
+  <!-- SLIDESHOW -->
   <div id="slideshow">
     <button id="home-btn" onclick="goHome()">&#8962; Home</button>
     <div id="counter"></div>
-
-    <div class="slide" id="slide-0">
-      <div class="slide-title">Team 7 Invincibles — Project Introduction</div>
-      <video id="v0" controls></video>
-      <div class="vid-error" id="e0">⚠ Video failed to load</div>
-    </div>
-    <div class="slide" id="slide-1">
-      <div class="slide-title">Preecey</div>
-      <video id="v1" controls></video>
-      <div class="vid-error" id="e1">⚠ Video failed to load</div>
-    </div>
-    <div class="slide" id="slide-2">
-      <div class="slide-title">SME FinTech — Unified Payments, Inventory &amp; Analytics</div>
-      <video id="v2" controls></video>
-      <div class="vid-error" id="e2">⚠ Video failed to load</div>
-    </div>
-    <div class="slide" id="slide-3">
-      <div class="slide-title">Precey 2</div>
-      <video id="v3" controls></video>
-      <div class="vid-error" id="e3">⚠ Video failed to load</div>
-    </div>
-
     <button class="arrow" id="prev" onclick="changeSlide(-1)">&#8592;</button>
     <button class="arrow" id="next" onclick="changeSlide(1)">&#8594;</button>
     <div id="dots"></div>
-  </div>
+
+    <!-- SLIDE 1: TEAM 7 THE INVINCIBLES -->
+    <div class="slide" id="slide-0">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;text-align:center;">
+        <div class="top-bar"></div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.5rem;">
+          <div class="badge">01</div>
+        </div>
+        <div style="font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);color:#d4af37;letter-spacing:.4em;text-transform:uppercase;margin-bottom:.5rem;">TEAM 7</div>
+        <div class="slide-h1-italic">THE INVINCIBLES</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:clamp(.85rem,2vw,1.2rem);color:#aaa;letter-spacing:.25em;margin-top:1.5rem;">DIFFERENT STRENGTHS &nbsp;·&nbsp; ONE MISSION &nbsp;·&nbsp; UNSTOPPABLE TOGETHER</div>
+        <div style="display:flex;gap:2rem;margin-top:2rem;font-size:2rem;">🛡️👁️📊&lt;/&gt;🎨⚙️</div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: PRICILLA -->
+    <div class="slide" id="slide-1">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">02</div>
+          <div class="member-name">PRICILLA</div>
+          <div class="member-role">Strategic Lead</div>
+          <div class="member-icon">🎯</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">THE MASTER PLAN</div>
+          <div class="member-desc">Sees the big picture and maps the path to victory.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Leads strategy, sets direction, and ensures all team goals align with the mission.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Big-picture thinking combined with decisive action planning.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: NKOSI -->
+    <div class="slide" id="slide-2">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">03</div>
+          <div class="member-name">NKOSI</div>
+          <div class="member-role">Creative Lead</div>
+          <div class="member-icon">👁️</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">THE VISION</div>
+          <div class="member-desc">Turns ideas into inspiring concepts that spark change.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Drives creative direction, visual identity and conceptual innovation for the team.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Transforming abstract ideas into tangible, impactful design concepts.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: PHUNYEZWA -->
+    <div class="slide" id="slide-3">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">04</div>
+          <div class="member-name">PHUNYEZWA</div>
+          <div class="member-role">Features &amp; Layout Superhero</div>
+          <div class="member-icon">📋</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">DESIGN THAT EMPOWERS</div>
+          <div class="member-desc">Creates experiences that are beautiful, intuitive and bold.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Owns features definition, layout architecture and user experience flow design.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Bridging user needs and design solutions with clarity and precision.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: WANDILE -->
+    <div class="slide" id="slide-4">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">05</div>
+          <div class="member-name">WANDILE</div>
+          <div class="member-role">App Builder</div>
+          <div class="member-icon">&lt;/&gt;</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">BUILDS THE DREAM</div>
+          <div class="member-desc">Turns concepts into powerful, working solutions.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Leads development, builds the application and brings all designs to life technically.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Turning complex requirements into clean, functional, scalable code.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: LLOYD -->
+    <div class="slide" id="slide-5">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">06</div>
+          <div class="member-name">LLOYD</div>
+          <div class="member-role">Figma Guru</div>
+          <div class="member-icon">🎨</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">HARMONY &amp; BALANCE</div>
+          <div class="member-desc">Brings clarity to chaos and designs with precision and flow.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Masters Figma prototyping, UI components and design system consistency across the product.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Creating pixel-perfect, harmonious interfaces that communicate clearly.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: LWANDO -->
+    <div class="slide" id="slide-6">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="flex-direction:row;gap:3rem;align-items:center;">
+        <div class="member-card" style="flex:1;">
+          <div class="badge">07</div>
+          <div class="member-name">LWANDO</div>
+          <div class="member-role">Mission Commander</div>
+          <div class="member-icon">⭐</div>
+          <div class="member-power-label">SUPERPOWER:</div>
+          <div class="member-power">KEEPS US ALIGNED</div>
+          <div class="member-desc">Guides the team, manages the mission and shields us from distractions.</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+          <div class="info-card"><h3>Role</h3><p>Project management, sprint coordination and team alignment throughout all phases.</p></div>
+          <div class="info-card"><h3>Key Strength</h3><p>Keeping focus, managing timelines and ensuring delivery without losing team energy.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: PRESENTATION CHARACTERS -->
+    <div class="slide" id="slide-7">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div style="font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.2rem,4vw,2.2rem);color:#d4af37;text-transform:uppercase;letter-spacing:.2em;text-align:center;margin-bottom:2rem;animation:goldPulse 3s ease-in-out infinite;">Presentation Characters</div>
+        <div class="three-col">
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">🎯</div><h3>Pricilla</h3><p>Strategic Lead</p></div>
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">👁️</div><h3>Nkosi</h3><p>Creative Lead</p></div>
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">📋</div><h3>Phunyezwa</h3><p>Features Lead</p></div>
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">&lt;/&gt;</div><h3>Wandile</h3><p>App Builder</p></div>
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">🎨</div><h3>Loyd</h3><p>Figma Lead</p></div>
+          <div class="info-card" style="align-items:center;text-align:center;"><div style="font-size:2.5rem;margin-bottom:.5rem;">⭐</div><h3>Lwando</h3><p>Project Mom</p></div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: UP NEXT — ELEVATOR PITCH -->
+    <div class="slide" id="slide-8">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center;">
+        <div class="upnext-label">Up Next:</div>
+        <div class="upnext-title">Our Elevator Pitch</div>
+        <div class="upnext-icon">🛗</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: SURVIVING TO THRIVING / STORYBOARD -->
+    <div class="slide" id="slide-9">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div style="font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.2rem,4vw,2rem);color:#d4af37;text-align:center;margin-bottom:1.5rem;animation:goldPulse 3s ease-in-out infinite;">[ Surviving to Thriving ]</div>
+        <div class="story-grid">
+          <div class="story-card"><div class="emoji">😰</div><h4>Behind the Scenes Chaos</h4><p>Nomsa frantically counting ingredients, trying to serve customers while managing orders.</p></div>
+          <div class="story-card"><div class="emoji">😤</div><h4>The Breaking Point</h4><p>Long queue at the truck. "Sorry — Out of Chicken &amp; Buns". Disappointed customers walking away.</p></div>
+          <div class="story-card"><div class="emoji">😔</div><h4>Nighttime Struggle</h4><p>Nomsa sitting at her kitchen table surrounded by notebooks, receipts and her phone. Clearly overwhelmed.</p></div>
+          <div class="story-card"><div class="emoji">💡</div><h4>The Discovery</h4><p>Nomsa on her couch at night, phone glowing. A message from her friend: "Try this inventory app!"</p></div>
+          <div class="story-card"><div class="emoji">😊</div><h4>First Light Relief</h4><p>Nomsa smiling at her phone, using the clean inventory management app. Real-time stock levels shown.</p></div>
+          <div class="story-card"><div class="emoji">🚀</div><h4>Smooth Operation</h4><p>Back at the food truck, Nomsa confidently serving customers. Everything organised — no stress.</p></div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: UP NEXT — DESIGN THINKING -->
+    <div class="slide" id="slide-10">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center;">
+        <div class="upnext-label">Up Next:</div>
+        <div class="upnext-title">The Design<br>Thinking Process</div>
+        <div class="upnext-icon">💡</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: NOMSA'S USER PROFILE -->
+    <div class="slide" id="slide-11">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div style="font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.2rem,4vw,2rem);color:#d4af37;text-align:center;margin-bottom:1.5rem;letter-spacing:.15em;animation:goldPulse 3s ease-in-out infinite;">NOMSA'S USER PROFILE</div>
+        <div class="two-col">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="info-card"><div class="num">📍</div><h3>Who She Is</h3><p>Nomsa, 32, owner of a food truck business in Johannesburg. Passionate, driven but overwhelmed by manual processes.</p></div>
+            <div class="info-card"><div class="num">😤</div><h3>Pain Points</h3><p>Runs out of stock unexpectedly. Loses track of sales. Spends hours doing admin. No real-time insights.</p></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="info-card"><div class="num">🎯</div><h3>Her Goal</h3><p>To manage her inventory, payments and business analytics from one simple, affordable mobile app.</p></div>
+            <div class="info-card"><div class="num">💬</div><h3>Her Words</h3><p>"I just need to know what I have, what I sold and what I made — without spending hours on spreadsheets."</p></div>
+          </div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: THE IDENTIFIED PROBLEM -->
+    <div class="slide" id="slide-12">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;text-align:center;justify-content:center;">
+        <div class="top-bar"></div>
+        <div style="font-size:4rem;margin-bottom:1rem;">🔍</div>
+        <div class="slide-h1">THE IDENTIFIED<br>PROBLEM</div>
+        <div style="max-width:700px;margin-top:1.5rem;">
+          <div class="info-card"><p style="font-size:clamp(.9rem,2.2vw,1.2rem);color:#ccc;line-height:1.7;">Small and medium enterprises (SMEs) like food truck operators lack an integrated, affordable digital tool to manage <span style="color:#d4af37;font-weight:700;">inventory</span>, <span style="color:#d4af37;font-weight:700;">payments</span>, and <span style="color:#d4af37;font-weight:700;">sales analytics</span> in real time — forcing them to rely on fragmented, manual processes that cost time and revenue.</p></div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14: HOW MIGHT WE -->
+    <div class="slide" id="slide-13">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div class="slide-h1" style="margin-bottom:1.5rem;">HOW MIGHT WE</div>
+        <div class="three-col">
+          <div class="info-card" style="text-align:center;"><div style="font-size:2rem;margin-bottom:.5rem;">📦</div><h3>Inventory</h3><p>How might we help Nomsa track stock levels in real time without manual counting?</p></div>
+          <div class="info-card" style="text-align:center;"><div style="font-size:2rem;margin-bottom:.5rem;">💳</div><h3>Payments</h3><p>How might we simplify payment collection so Nomsa never loses a sale?</p></div>
+          <div class="info-card" style="text-align:center;"><div style="font-size:2rem;margin-bottom:.5rem;">📊</div><h3>Analytics</h3><p>How might we give Nomsa clear insights into her business performance daily?</p></div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 15: BRAINSTORMING & IDEATE -->
+    <div class="slide" id="slide-14">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center;">
+        <div class="top-bar"></div>
+        <div class="upnext-icon" style="margin-top:0;">💡</div>
+        <div class="slide-h1" style="margin-top:.5rem;margin-bottom:1rem;">Brainstorming<br>&amp; Ideate</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;width:100%;max-width:800px;">
+          <div class="info-card" style="text-align:center;"><div style="font-size:1.5rem;">🔄</div><h3>Rapid Ideation</h3><p>60-minute sprint generating 30+ feature ideas per round.</p></div>
+          <div class="info-card" style="text-align:center;"><div style="font-size:1.5rem;">🗳️</div><h3>Dot Voting</h3><p>Team voted on top ideas based on impact vs. feasibility.</p></div>
+          <div class="info-card" style="text-align:center;"><div style="font-size:1.5rem;">🏆</div><h3>Top 3 Features</h3><p>Unified dashboard, smart alerts, one-tap payment integration.</p></div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 16: UP NEXT — FINAL OUTCOME -->
+    <div class="slide" id="slide-15">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center;">
+        <div class="upnext-label">Up Next:</div>
+        <div class="upnext-title">The<br>Final Outcome</div>
+        <div class="upnext-icon">🏆</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 17: PROTOTYPE -->
+    <div class="slide" id="slide-16">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div class="slide-h1" style="margin-bottom:1.5rem;">PROTOTYPE</div>
+        <div class="two-col">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="info-card"><div class="num">📐</div><h3>Wireframes</h3><p>Low-fidelity sketches mapping all core screens and user flows built in Figma.</p></div>
+            <div class="info-card"><div class="num">🎨</div><h3>High-Fidelity UI</h3><p>Full colour, pixel-perfect screens designed with the SME user in mind.</p></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="info-card"><div class="num">🔗</div><h3>Clickable Prototype</h3><p>Interactive Figma prototype demonstrating the complete user journey end to end.</p></div>
+            <div class="info-card"><div class="num">✅</div><h3>User Testing</h3><p>Tested with 3 SME users. Iterated on feedback. Refined 12 UI elements.</p></div>
+          </div>
+        </div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 18: UP NEXT — CONCLUSION -->
+    <div class="slide" id="slide-17">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;justify-content:center;text-align:center;">
+        <div class="upnext-label">Up Next:</div>
+        <div class="upnext-title">The<br>Conclusion</div>
+        <div class="upnext-icon">🎯</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 19: DESIGN JOURNEY — REFLECTION & GROWTH -->
+    <div class="slide" id="slide-18">
+      <div class="slide-bg"></div>
+      <div class="slide-inner" style="align-items:center;">
+        <div class="top-bar"></div>
+        <div style="font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1rem,3vw,1.6rem);color:#d4af37;text-align:center;margin-bottom:1.2rem;letter-spacing:.1em;animation:goldPulse 3s ease-in-out infinite;">Our Design Journey: Reflection &amp; Growth</div>
+        <div class="highs-lows">
+          <div class="box-highs"><h3>⬆ Project Highs</h3><ul><li>Successful Prototype Development (Concept to Reality)</li><li>Integrated Final Product</li></ul></div>
+          <div class="box-lows"><h3>⬇ Project Lows</h3><ul><li>Tight Sprint Timeline Management</li><li>Time Constraint Challenges</li></ul></div>
+        </div>
+        <div class="learnings"><h3>🧭 Key Team Learnings</h3><ul><li>The Crucial Role of Effective Teamwork</li><li>Value of Rapid Ideation + Cohesive Collaboration</li><li>Key Emphasis: Constant User-Centric Focus (compass pointing to core user)</li></ul></div>
+        <div class="bottom-bar"></div>
+      </div>
+    </div>
+
+  </div><!-- end slideshow -->
 
   <script>
-    // ── Step 1: if opened as file://, go to server ──
-    if (window.location.protocol === 'file:') {
-      window.location.replace('http://localhost:3000/index.html');
+    // particles
+    var pEl=document.getElementById('particles');
+    for(var i=0;i<30;i++){var p=document.createElement('div');p.className='particle';var sz=(2+Math.random()*4)+'px';p.style.cssText='left:'+Math.random()*100+'vw;width:'+sz+';height:'+sz+';animation-duration:'+(6+Math.random()*10)+'s;animation-delay:'+Math.random()*12+'s;background:'+(Math.random()>.5?'#ff69b4':'#ffffff')+';';pEl.appendChild(p);}
+
+    // slideshow
+    var slides=document.querySelectorAll('.slide');
+    var dotsWrap=document.getElementById('dots');
+    var counter=document.getElementById('counter');
+    var current=0,animating=false;
+
+    slides.forEach(function(_,i){var d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=function(){goTo(i);};dotsWrap.appendChild(d);});
+
+    function updateDots(){document.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===current);});counter.textContent=(current+1)+' / '+slides.length;}
+
+    function goTo(index,instant){
+      if(animating&&!instant)return;
+      if(index===current&&!instant)return;
+      animating=true;
+      var oldSlide=slides[current];
+      var newSlide=slides[index];
+      if(!instant){oldSlide.classList.add('exit-left');oldSlide.classList.remove('active');}
+      else{slides.forEach(function(s){s.classList.remove('active','exit-left');});}
+      newSlide.style.transition='none';newSlide.style.opacity='0';
+      newSlide.style.transform=index>current?'translateX(80px)':'translateX(-80px)';
+      requestAnimationFrame(function(){requestAnimationFrame(function(){
+        newSlide.style.transition='';newSlide.classList.add('active');
+        current=index;updateDots();
+        setTimeout(function(){if(oldSlide!==newSlide)oldSlide.classList.remove('exit-left');animating=false;},900);
+      });});
     }
 
-    const videoFiles = [
-      'Team 7 Invincibles Project Introduction.mp4',
-      'preecey.mp4',
-      'SME FinTech_ Unified Payments, Inventory, Analytics.mp4',
-      'Precey 2.mp4'
-    ];
+    function changeSlide(dir){goTo((current+dir+slides.length)%slides.length);}
 
-    // ── Step 2: load videos ──
-    function loadVideos() {
-      // always use the origin that served the page
-      const base = window.location.origin + '/';
+    var introTimer=null;
 
-      videoFiles.forEach(function(name, i) {
-        var vid  = document.getElementById('v' + i);
-        var errDiv = document.getElementById('e' + i);
-        var url  = base + encodeURIComponent(name);
-
-        console.log('Loading video ' + i + ' from: ' + url);
-
-        vid.src = url;
-        vid.load();
-
-        vid.addEventListener('error', function() {
-          console.error('Video ' + i + ' failed. src=' + vid.src
-            + ' error=' + (vid.error ? vid.error.code : 'unknown'));
-          errDiv.textContent = '⚠ Cannot load: ' + name
-            + ' (error ' + (vid.error ? vid.error.code : '?') + ')  —  '
-            + 'Try: ' + url;
-          errDiv.style.display = 'block';
-        });
-
-        vid.addEventListener('loadedmetadata', function() {
-          console.log('Video ' + i + ' ready: ' + vid.duration + 's');
-        });
-      });
+    function startShow(){
+      var ws=document.getElementById('welcome-screen');
+      ws.style.opacity='0';
+      setTimeout(function(){ws.style.display='none';showIntro();},1400);
     }
 
-    // Run now and again after DOM ready (belt and braces)
-    loadVideos();
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadVideos);
+    function showIntro(){
+      var intro=document.getElementById('intro-slide');
+      intro.style.display='flex';
+      requestAnimationFrame(function(){requestAnimationFrame(function(){intro.style.opacity='1';});});
+      var iw=document.getElementById('iw'),ib=document.getElementById('ib'),ir=document.getElementById('ir'),im=document.getElementById('im'),it=document.getElementById('it'),skip=document.getElementById('skip-btn');
+      setTimeout(function(){iw.style.opacity='1';iw.style.transform='translateY(0)';},400);
+      setTimeout(function(){ib.style.opacity='1';ib.style.transform='scale(1)';},800);
+      setTimeout(function(){ir.style.width='min(360px,55vw)';},1200);
+      setTimeout(function(){im.style.opacity='1';im.style.transform='translateY(0)';},1400);
+      setTimeout(function(){it.style.opacity='1';it.style.transform='translateY(0)';},1900);
+      setTimeout(function(){skip.classList.add('visible');},2500);
+      introTimer=setTimeout(function(){launchShow();},5500);
     }
 
-    // ── Particles ──
-    var pEl = document.getElementById('particles');
-    for (var i = 0; i < 30; i++) {
-      var p  = document.createElement('div');
-      p.className = 'particle';
-      var sz = (2 + Math.random() * 4) + 'px';
-      p.style.cssText = 'left:' + (Math.random()*100) + 'vw;'
-        + 'width:' + sz + ';height:' + sz + ';'
-        + 'animation-duration:' + (6+Math.random()*10) + 's;'
-        + 'animation-delay:' + (Math.random()*12) + 's;'
-        + 'background:' + (Math.random()>.5?'#ff69b4':'#ffffff') + ';';
-      pEl.appendChild(p);
-    }
-
-    // ── Slideshow ──
-    var slides   = document.querySelectorAll('.slide');
-    var dotsWrap = document.getElementById('dots');
-    var counter  = document.getElementById('counter');
-    var current  = 0, animating = false;
-
-    slides.forEach(function(_, i) {
-      var d = document.createElement('div');
-      d.className = 'dot' + (i===0?' active':'');
-      d.onclick = function(){ goTo(i); };
-      dotsWrap.appendChild(d);
-    });
-
-    function updateDots() {
-      document.querySelectorAll('.dot').forEach(function(d,i){
-        d.classList.toggle('active', i===current);
-      });
-      counter.textContent = (current+1) + ' / ' + slides.length;
-    }
-
-    function goTo(index, instant) {
-      if (animating && !instant) return;
-      if (index===current && !instant) return;
-      animating = true;
-      var oldSlide = slides[current];
-      var newSlide = slides[index];
-      if (!instant) {
-        oldSlide.classList.add('exit-left');
-        oldSlide.classList.remove('active');
-        oldSlide.querySelector('video').pause();
-      } else {
-        slides.forEach(function(s){ s.classList.remove('active','exit-left'); });
-      }
-      newSlide.style.transition = 'none';
-      newSlide.style.opacity    = '0';
-      newSlide.style.transform  = index > current ? 'translateX(80px)' : 'translateX(-80px)';
-      requestAnimationFrame(function(){
-        requestAnimationFrame(function(){
-          newSlide.style.transition = '';
-          newSlide.classList.add('active');
-          current = index;
-          updateDots();
-          setTimeout(function(){
-            if (oldSlide !== newSlide) oldSlide.classList.remove('exit-left');
-            animating = false;
-          }, 900);
-        });
-      });
-    }
-
-    function changeSlide(dir) { goTo((current+dir+slides.length)%slides.length); }
-
-    var introTimer = null;
-
-    function startShow() {
-      var ws = document.getElementById('welcome-screen');
-      ws.style.opacity = '0';
-      setTimeout(function(){ ws.style.display='none'; showIntro(); }, 1400);
-    }
-
-    function showIntro() {
-      var intro = document.getElementById('intro-slide');
-      intro.style.display = 'flex';
-      requestAnimationFrame(function(){
-        requestAnimationFrame(function(){ intro.style.opacity='1'; });
-      });
-      var iw=document.getElementById('iw'), ib=document.getElementById('ib');
-      var ir=document.getElementById('ir'), im=document.getElementById('im');
-      var it=document.getElementById('it'), skip=document.getElementById('skip-btn');
-      setTimeout(function(){ iw.style.opacity='1'; iw.style.transform='translateY(0)'; }, 400);
-      setTimeout(function(){ ib.style.opacity='1'; ib.style.transform='scale(1)'; },     800);
-      setTimeout(function(){ ir.style.width='min(360px,55vw)'; },                        1200);
-      setTimeout(function(){ im.style.opacity='1'; im.style.transform='translateY(0)'; },1400);
-      setTimeout(function(){ it.style.opacity='1'; it.style.transform='translateY(0)'; },1900);
-      setTimeout(function(){ skip.classList.add('visible'); },                            2500);
-      introTimer = setTimeout(function(){ launchShow(); }, 5500);
-    }
-
-    function launchShow() {
-      if (introTimer){ clearTimeout(introTimer); introTimer=null; }
-      var intro = document.getElementById('intro-slide');
-      intro.style.opacity = '0';
+    function launchShow(){
+      if(introTimer){clearTimeout(introTimer);introTimer=null;}
+      var intro=document.getElementById('intro-slide');
+      intro.style.opacity='0';
       setTimeout(function(){
-        intro.style.display = 'none';
-        var ss = document.getElementById('slideshow');
-        ss.style.display = 'flex';
-        goTo(0, true);
-      }, 1200);
+        intro.style.display='none';
+        var ss=document.getElementById('slideshow');
+        ss.style.display='flex';
+        goTo(0,true);
+      },1200);
     }
 
-    function goHome() {
-      document.querySelectorAll('video').forEach(function(v){ v.pause(); });
-      document.getElementById('slideshow').style.display = 'none';
-      var ws = document.getElementById('welcome-screen');
-      ws.style.display = 'flex';
-      ws.style.opacity = '0';
-      requestAnimationFrame(function(){
-        requestAnimationFrame(function(){ ws.style.opacity='1'; });
-      });
+    function goHome(){
+      document.getElementById('slideshow').style.display='none';
+      var ws=document.getElementById('welcome-screen');
+      ws.style.display='flex';ws.style.opacity='0';
+      requestAnimationFrame(function(){requestAnimationFrame(function(){ws.style.opacity='1';});});
     }
 
-    document.addEventListener('keydown', function(e) {
-      if (document.getElementById('slideshow').style.display==='none') return;
-      if (e.key==='ArrowRight'||e.key==='ArrowDown') changeSlide(1);
-      if (e.key==='ArrowLeft' ||e.key==='ArrowUp')   changeSlide(-1);
+    document.addEventListener('keydown',function(e){
+      if(document.getElementById('slideshow').style.display==='none')return;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown')changeSlide(1);
+      if(e.key==='ArrowLeft'||e.key==='ArrowUp')changeSlide(-1);
     });
 
     updateDots();
